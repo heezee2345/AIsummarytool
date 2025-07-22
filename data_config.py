@@ -1,4 +1,47 @@
 # data_config.py
+import os
+from pathlib import Path
+
+# 프로젝트 루트 디렉토리
+PROJECT_ROOT = Path(__file__).parent
+
+# 데이터 디렉토리
+DATA_DIR = PROJECT_ROOT / "data"
+
+# 교육부 기본 어휘 파일 경로 (data 폴더 안에 있음)
+VOCAB_FILE_PATH_2015 = DATA_DIR / "2015년 교육부 기본 어휘 3000개_전체.txt"
+VOCAB_FILE_PATH_2022 = DATA_DIR / "2022년 교육부 기본 어휘 3000개_전체.txt"
+
+# 기타 설정
+DEFAULT_ENCODING = "utf-8"
+VOCAB_SEPARATOR = " : "
+
+def ensure_data_directory():
+    """데이터 디렉토리가 존재하는지 확인하고 없으면 생성합니다."""
+    DATA_DIR.mkdir(exist_ok=True)
+    return DATA_DIR
+
+def get_vocab_file_paths():
+    """어휘 파일 경로들을 반환합니다."""
+    return {
+        "2015": str(VOCAB_FILE_PATH_2015),
+        "2022": str(VOCAB_FILE_PATH_2022)
+    }
+
+def check_vocab_files_exist():
+    """어휘 파일들이 존재하는지 확인합니다."""
+    paths = get_vocab_file_paths()
+    status = {}
+    
+    for year, path in paths.items():
+        file_path = Path(path)
+        status[year] = {
+            "exists": file_path.exists(),
+            "path": str(file_path),
+            "size": file_path.stat().st_size if file_path.exists() else 0
+        }
+    
+    return status
 
 TAM_SURVEY_QUESTIONS = {
     "인지된_유용성": [
