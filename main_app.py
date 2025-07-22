@@ -1,6 +1,7 @@
 # main_app.py
 import datetime
 import streamlit as st
+st.set_page_config(page_title="AI Summary Tool", layout="wide")
 
 # Import functions and data from other modules
 from data_config import TAM_SURVEY_QUESTIONS, CURRICULUM_STANDARDS
