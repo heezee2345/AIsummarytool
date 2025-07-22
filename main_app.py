@@ -10,11 +10,6 @@ from ai_services import extract_keywords, translate_keywords_to_korean, generate
 from utils import count_words
 
 # Streamlit 앱 설정
-st.set_page_config(
-    page_title="AI English Summary Assistant for Teachers", 
-    layout="wide",
-    initial_sidebar_state="collapsed"
-)
 
 # 세션 상태 초기화
 if "stage" not in st.session_state:
